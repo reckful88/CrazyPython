@@ -1,7 +1,6 @@
 Crazy to learn English !!!!  Everyday Commit !!!!! 
 
 
-'''
 Now i have come to the crossroads in my life.        
 如今我走到人生十字路口          
 i always knew what the right path was.         
@@ -13,4 +12,3 @@ but i never took it.You know why ?
 it was too damn hard.          
 因为妈的太难了             
                                       For 《闻香识女人》Al Pacino
-'''
