@@ -11,5 +11,5 @@ Without exception, I knew,
 but i never took it.You know why ? 
 但我从不走，为什么？ 
 it was too damn hard. 
-因为妈的太难了
+因为妈的太难了      for <闻香识女人>Al Pacino
 '''
