@@ -17,3 +17,4 @@ def all(iterable):
 
 
 print all('element')
+print all('')
