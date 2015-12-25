@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# =*= coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 '''
 熟悉了解Unicode 和 格式化
