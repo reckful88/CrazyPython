@@ -30,3 +30,9 @@ print 'nihao, %s, ni you %d yuan' % ('sam',100)
 print 'nihao, %s, ni you %f yuan, ni de nian ling shi %d sui' % ('Jack',15,22)
 
 
+print '%2d-%02d' % (3,1)
+print '%.2f' % 3.1415926
+
+print u'Hi, %s' % u'Michael'
+print 'Age: %s. Gender: %s' % (25, True)
+print 'growth rate: %d %%' % 7
