@@ -1,11 +1,4 @@
-#-*- coding:utf-8 -*-
-#/usr/bin/env python
-#
-
-'''SQLAlchemy-migrate通过对比数据库的结构（从app.db文件读取）和models结构（从app/models.py文件读取）的方式来创建迁移任务，
-两者之间的差异将作为一个迁移脚本记录在迁移库中，迁移脚本知道如何应用或者撤销一次迁移，所以它可以方便的升级或者降级一个数据库的格式。
-'''
-
+#!flask/bin/python
 import imp
 from migrate.versioning import api
 from app import db
@@ -24,7 +17,3 @@ api.upgrade(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
 v = api.db_version(SQLALCHEMY_DATABASE_URI, SQLALCHEMY_MIGRATE_REPO)
 print('New migration saved as ' + migration)
 print('Current database version: ' + str(v))
-
-
-'''在你试图迁移数据库前必须做好备份，以防出现问题,
-不要在生产用的数据库上运行第一次使用的脚本，先在开发用的数据库上运行下。'''

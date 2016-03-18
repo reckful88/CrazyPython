@@ -3,10 +3,8 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-
 CSRF_ENABLED = True
 SECRET_KEY = 'you-will-never-guess'
-
 
 
 '''这是Flask-WTF需要用到的2个配置项。CSRF_ENABLED配置启用了跨站请求攻击保护，
@@ -26,3 +24,14 @@ OPENID_PROVIDERS = [
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'app.db')
 #存储SQLAlchemy-migrate数据库文件的文件夹
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+
+
+#通过email发送错误日志
+# mail server settings
+MAIL_SERVER = 'localhost'
+MAIL_PORT = 25
+MAIL_USERNAME = None
+MAIL_PASSWORD = None
+
+# administrator list
+ADMINS = ['you@example.com']
