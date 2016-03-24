@@ -57,7 +57,7 @@ init:
 登录系统,我们将使用两个扩展,Flask-Login 和 Flask-OpenID
 在没有邮件服务器的pc上测试邮件功能,打开一个控制台窗口，并且运行下面的命令：
 python -m smtpd -n -c DebuggingServer localhost:25
-
+关注、followers功能
 
 
 

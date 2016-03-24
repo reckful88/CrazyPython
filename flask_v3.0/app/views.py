@@ -91,8 +91,8 @@ def login():
 @oid.after_login
 def after_login(resp):
     if resp.email is None or resp.email == "":   #为了验证，要求一个有效的email
-        flash('Invalid login. please try agagin.')
-        return redirect(usr_for('login'))
+        flash('Invalid login. Please try again.')
+        return redirect(url_for('login'))
     user = User.query.filter_by(email=resp.email).first()
     if user is None:
         nickname = resp.nickname
@@ -101,6 +101,9 @@ def after_login(resp):
         nickname = User.make_unique_nickname(nickname)
         user = User(nickname=nickname, email=resp.email)
         db.session.add(user)
+        db.session.commit()
+        # make the user follow him/herself
+        db.session.add(user.follow(user))
         db.session.commit()
     remember_me = False
     if 'remember_me' in session:
@@ -147,3 +150,36 @@ def edit():
         form.nickname.data = g.user.nickname
         form.about_me.data = g.user.about_me
     return render_template('edit.html', form=form)
+
+
+# 关注和取消关注的链接
+@app.route('/follow/<nickname>')
+def follow(nickname):
+    user = User.query.filter_by(nickname=nickname).first()
+    if user is None:
+        flash('User ' + nickname + ' not found.')
+        return redirect(url_for('index'))
+    u = g.user.follow(user)
+    if u is None:
+        flash('Cannot follow ' + nickname + '.')
+        return redirect(url_for('user', nickname=nickname))
+    db.session.add(u)
+    db.session.commit()
+    flash('You are now following ' + nickname + '!')
+    return redirect(url_for('user', nickname=nickname))
+
+
+@app.route('/unfollow/<nickname>')
+def unfollow(nickname):
+    user = User.query.filter_by(nickname=nickname).first()
+    if user is None:
+        flash('User ' + nickname + ' not found.')
+        return redirect(url_for('index'))
+    u = g.user.unfollow(user)
+    if u is None:
+        flash('Cannot unfollow ' + nickname + '.')
+        return redirect(url_for('user', nickname=nickname))
+    db.session.add(u)
+    db.session.commit()
+    flash('You have stopped following ' + nickname + '.')
+    return redirect(url_for('user', nickname=nickname))
