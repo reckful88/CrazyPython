@@ -30,10 +30,12 @@ WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
 #通过email发送错误日志
 # mail server settings
-MAIL_SERVER = 'localhost'
+MAIL_SERVER = 'your.mailserver.com'
 MAIL_PORT = 25
-MAIL_USERNAME = None
-MAIL_PASSWORD = None
+MAIL_USE_TLS = False
+MAIL_USE_SSL = False
+MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
 
 # administrator list
 ADMINS = ['you@example.com']
@@ -42,3 +44,15 @@ ADMINS = ['you@example.com']
 # pagination
 POSTS_PER_PAGE = 3
 MAX_SEARCH_RESULTS = 50
+
+
+# email server
+#MAIL_SERVER = 'smtp.googlemail.com'
+#MAIL_PORT = 465
+#MAIL_USE_TLS = False
+#MAIL_USE_SSL = True
+#MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+#MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+
+# administrator list
+#ADMINS = ['your-gmail-username@gmail.com']

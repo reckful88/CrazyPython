@@ -6,9 +6,10 @@ from flask.ext.login import login_user, logout_user, current_user, \
     login_required
 from datetime import datetime
 from app import app, db, lm, oid
-from .forms import LoginForm, EditForm, PostForm
+from .forms import LoginForm, EditForm, PostForm, SearchForm
 from .models import User, Post
-from config import POSTS_PER_PAGE
+from .emails import follower_notification
+from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
 
 
 
@@ -153,11 +154,15 @@ def edit():
 
 # 关注和取消关注的链接
 @app.route('/follow/<nickname>')
+@login_required
 def follow(nickname):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:
-        flash('User ' + nickname + ' not found.')
+        flash('User %s not found.' % nickname)
         return redirect(url_for('index'))
+    if user == g.user:
+        flash('You can\'t follow yourself!')
+        return redirect(url_for('user', nickname=nickname))
     u = g.user.follow(user)
     if u is None:
         flash('Cannot follow ' + nickname + '.')
@@ -165,15 +170,21 @@ def follow(nickname):
     db.session.add(u)
     db.session.commit()
     flash('You are now following ' + nickname + '!')
+    follower_notification(user, g.user)
     return redirect(url_for('user', nickname=nickname))
 
 
+
 @app.route('/unfollow/<nickname>')
+@login_required
 def unfollow(nickname):
     user = User.query.filter_by(nickname=nickname).first()
     if user is None:
-        flash('User ' + nickname + ' not found.')
+        flash('User %s not found.' % nickname)
         return redirect(url_for('index'))
+    if user == g.user:
+        flash('You can\'t unfollow yourself!')
+        return redirect(url_for('user', nickname=nickname))
     u = g.user.unfollow(user)
     if u is None:
         flash('Cannot unfollow ' + nickname + '.')

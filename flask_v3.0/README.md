@@ -187,3 +187,16 @@ DB:
 ...
 >>> db.session.commit()
 >>>
+
+
+邮件功能：
+发个邮件试试！
+为了了解flask-mail如何工作的，我们可以从命令行发一封邮件看看。进入python shell并执行如下的脚本：
+
+>>> from flask.ext.mail import Message
+>>> from app import mail
+>>> from config import ADMINS
+>>> msg = Message('test subject', sender = ADMINS[0], recipients = ADMINS)
+>>> msg.body = 'text body'
+>>> msg.html = '<b>HTML</b> body'
+>>> mail.send(msg)
