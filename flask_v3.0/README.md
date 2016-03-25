@@ -200,3 +200,16 @@ DB:
 >>> msg.body = 'text body'
 >>> msg.html = '<b>HTML</b> body'
 >>> mail.send(msg)
+
+
+介绍Bootstrap
+
+我们来至Twitter的好朋友发布一个开源的Web框架叫Bootstrap ，它可能就是我们制胜关键。
+Bootstrap是一个用于所有通用类型的网页开发的CSS和Javascript组件集合。如果您想看看使用这个框架可以开发的页面效果，这里是一些样例。
+下面是Bootstrap擅长的地方：
+在主流浏览器上显示一致
+自动捕获桌面，手机和平板的屏幕尺寸
+自定义布局
+完整样式的导航条
+完整样式的表单
+还有很多很多...
