@@ -46,4 +46,4 @@ class PostForm(Form):
 
 # 新增一个搜索类
 class SearchForm(Form):
-    search = TextField('search', validators = [Required()])
+    search = StringField('search', validators=[DataRequired()])
