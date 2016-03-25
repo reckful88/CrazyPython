@@ -42,3 +42,8 @@ class EditForm(Form):
 
 class PostForm(Form):
     post = StringField('post', validators=[DataRequired()])
+
+
+# 新增一个搜索类
+class SearchForm(Form):
+    search = TextField('search', validators = [Required()])

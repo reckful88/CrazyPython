@@ -20,10 +20,12 @@ OPENID_PROVIDERS = [
     { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]
 
 
-#数据库文件的路径。
+# 数据库文件的路径。
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,'app.db')
-#存储SQLAlchemy-migrate数据库文件的文件夹
+# 存储SQLAlchemy-migrate数据库文件的文件夹
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+# 配置Flask-WhooshAlchemy
+WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
 
 #通过email发送错误日志
@@ -39,3 +41,4 @@ ADMINS = ['you@example.com']
 
 # pagination
 POSTS_PER_PAGE = 3
+MAX_SEARCH_RESULTS = 50

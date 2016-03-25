@@ -15,6 +15,16 @@ __repr__方法告诉Python如何打印class对象，方便我们调试使用。'
 
 from hashlib import md5
 from app import db
+from app import app
+
+
+import sys
+if sys.version_info >= (3, 0):
+    enable_search = False
+else:
+    enable_search = True
+    import flask.ext.whooshalchemy as whooshalchemy
+
 
 #ROLE_USER = 0
 #ROLE_ADMIN = 1
@@ -116,13 +126,19 @@ class User(db.Model):
 
 
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    __searchable__ = ['body']
+
+    id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Post %r>' % (self.body)
+
+
+if enable_search:
+    whooshalchemy.whoosh_index(app, Post)
 
 '''增加了一个表示用户写的微博的Post类，user_id字段在Post类中被初始化指定为一个外键，
 因此Flask-SQLAlchemy会知道这个字段将会和用户做关联。'''
